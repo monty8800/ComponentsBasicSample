@@ -19,9 +19,6 @@ import com.montywu.demo.componentsbasicsample.entity.User;
 
 public class MainFragment extends Fragment {
 
-    private MainViewModel mViewModel;
-
-
     public static MainFragment newInstance() {
         return new MainFragment();
     }
@@ -30,8 +27,6 @@ public class MainFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-//        MainFragmentBinding inflate = DataBindingUtil.inflate(inflater, R.layout.main_fragment, container, false);
-
         return inflater.inflate(R.layout.main_fragment, container, false);
     }
 
@@ -39,19 +34,11 @@ public class MainFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         MainFragmentBinding mainFragmentBinding = DataBindingUtil.bind(view);
-        mViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
-
-        mViewModel.getUser().observe(this, new Observer<User>() {
-            @Override
-            public void onChanged(@Nullable User user) {
-                Toast.makeText(getContext(),user.firstName,Toast.LENGTH_LONG).show();
-            }
-        });
 
         User user = new User("wu","Monty");
         mainFragmentBinding.setUser(user);
+        mainFragmentBinding.setHandler(new MyHandlers(getContext()));
 
-        mViewModel.getUser().setValue(user);
     }
 
     @Override

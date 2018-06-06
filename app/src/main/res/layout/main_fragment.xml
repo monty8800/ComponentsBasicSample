@@ -8,9 +8,10 @@
         <variable
             name="user"
             type="com.montywu.demo.componentsbasicsample.entity.User" />
+
         <variable
-            name="viewModel"
-            type="com.montywu.demo.componentsbasicsample.ui.main.MainViewModel" />
+            name="handler"
+            type="com.montywu.demo.componentsbasicsample.ui.main.MyHandlers" />
 
     </data>
 
@@ -24,7 +25,8 @@
             android:id="@+id/tv_firstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{viewModel.getUser().}"
+            android:onClick="@{(v)->handler.onClick(v,user)}"
+            android:text="@{user.firstName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.309"
